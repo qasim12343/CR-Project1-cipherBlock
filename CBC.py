@@ -18,8 +18,10 @@ class CBC:
             subPlains_64.append(plainText[i:i+64])
             i += 64
             if i >= len(plainText):
+                return subPlains_64
+            if i+64 >= len(plainText):
                 subPlains_64.append(plainText[i:len(plainText)].zfill(64))
-                return
+                return subPlains_64
 
     def cellOps(self):
 
@@ -30,4 +32,6 @@ class CBC:
         bc.xor(self.plainText, self.bin_rand)
 
 
-c = CBC()
+c = CBC(bc.plainText, bc.key)
+s = c.generate_subPlains64(bc.key)
+print(s)
