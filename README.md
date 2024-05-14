@@ -17,8 +17,13 @@ Both mod based on block cipher that implemented in BlockCipher.py.
 
 Encryption is a crucial aspect of securing data. This repository provides examples of two encryption modes:
 
-- **CBC (Cipher Block Chaining)**: A block cipher mode that provides confidentiality by XORing each plaintext block with the previous ciphertext block before encrypting.
+- **CBC (Cipher Block Chaining)**:A block cipher mode that provides confidentiality by XORing each plaintext block with the previous ciphertext block before encrypting.
+  
+  ![CBC_encryption svg](https://github.com/qasim12343/CR-Project1-cipherBlock/assets/93463121/322fd236-35ff-4a53-bff9-42b43b8521ad)
+
 - **CTR (Counter)**: A block cipher mode that turns a block cipher into a stream cipher. It generates the next keystream block by encrypting successive values of a counter.
+  
+![download](https://github.com/qasim12343/CR-Project1-cipherBlock/assets/93463121/91941692-28b7-4b21-9a50-bd0d23de5982)
 
 ## Requirements
 
