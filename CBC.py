@@ -57,3 +57,13 @@ class CBC_CTR:
             c = self.ctr_cellOps(self.key, counter, subPlains_64[i])
             cipherBlocks.append(c)
         return cipherBlocks
+
+
+plainText = '110100111011001010101010111010111001100110101001111100010111010101'
+key = '11010011101100101010101011101011100110011010100111110001011101001100101010100101011011101011110011010100101011011100101011011010'
+
+c = CBC_CTR(plainText, key)
+c1 = c.CBC()
+c2 = c.CTR()
+print(c1)
+print(c2)
