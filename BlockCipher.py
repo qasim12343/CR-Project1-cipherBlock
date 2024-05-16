@@ -4,15 +4,13 @@ key = '1101001110110010101010101110101110011001101010011111000101110100110010101
 
 def generate_subkeys(key):
     sub = [key[i:i+16] for i in range(0, len(key), 16)]
-    subs = []
-    for i in range(6):
+    subs = sub
+    for j in range(6):
+        key = key[24:]+key[:24]  # 25 bit left cyclic shift
+        sub = [key[i:i+16] for i in range(0, len(key), 16)]
         subs += sub
 
-    subs.append(sub[0])
-    subs.append(sub[1])
-    subs.append(sub[2])
-    subs.append(sub[3])
-    return subs
+    return subs[0:52]
 
 
 def generate_subPlains(plain):
@@ -76,3 +74,15 @@ def lastRoundOps(plain_arr, subKey_arr):
     s3 = addModular(r3, k3)
     s4 = multiplyModular(r4, k4)
     return [s1, s2, s3, s4]
+
+
+def byte_to_binary(byte_seqs):
+    return ''.join(format(byte, '08b') for byte in byte_seqs)
+
+
+byteplain = b"\x00\x11\x22\x33\x44\x55\x66\x77"
+bytekey = b"\x81\x23\x45\x67\x89\xab\xcd\xef\xfe\xdc\xba\x98\x76\x54\x32\x18"
+p, k = byte_to_binary(byteplain), byte_to_binary(bytekey)
+
+# c = cipherBlock(k, p)
+# print(c)
