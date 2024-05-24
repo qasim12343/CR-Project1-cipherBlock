@@ -6,7 +6,7 @@ def generate_subkeys(key):
     sub = [key[i:i+16] for i in range(0, len(key), 16)]
     subs = sub
     for j in range(6):
-        key = key[24:]+key[:24]  # 25 bit left cyclic shift
+        key = key[25:]+key[:25]  # 25 bit left cyclic shift
         sub = [key[i:i+16] for i in range(0, len(key), 16)]
         subs += sub
 
@@ -19,17 +19,6 @@ def generate_subPlains(plain):
     p3 = plain[32:48]
     p4 = plain[48:64]
     return [p1, p2, p3, p4]
-
-
-def cipherBlock(key, plain):
-    subKey_arr = generate_subkeys(key)
-    plain_arr = generate_subPlains(plain)
-    j = 0
-    for i in range(8):
-        plain_arr = roundOps(plain_arr, subKey_arr[j:j+6])
-        j = j+6
-    c1, c2, c3, c4 = lastRoundOps(plain_arr, subKey_arr[48:52])
-    return c1+c2+c3+c4
 
 
 def addModular(bin_str1, bin_str2):
@@ -76,13 +65,28 @@ def lastRoundOps(plain_arr, subKey_arr):
     return [s1, s2, s3, s4]
 
 
+def cipherBlock(key, plain):
+    subKey_arr = generate_subkeys(key)
+    plain_arr = generate_subPlains(plain)
+    j = 0
+    for i in range(8):
+        plain_arr = roundOps(plain_arr, subKey_arr[j:j+6])
+        j = j+6
+    c1, c2, c3, c4 = lastRoundOps(plain_arr, subKey_arr[48:52])
+    return c1+c2+c3+c4
+
+
 def byte_to_binary(byte_seqs):
     return ''.join(format(byte, '08b') for byte in byte_seqs)
 
 
-byteplain = b"\x00\x11\x22\x33\x44\x55\x66\x77"
-bytekey = b"\x81\x23\x45\x67\x89\xab\xcd\xef\xfe\xdc\xba\x98\x76\x54\x32\x18"
-p, k = byte_to_binary(byteplain), byte_to_binary(bytekey)
+# byteplain = b"\x00\x11\x22\x33\x44\x55\x66\x77"
+# bytekey = b"\x81\x23\x45\x67\x89\xab\xcd\xef\xfe\xdc\xba\x98\x76\x54\x32\x18"
+# p, k = byte_to_binary(byteplain), byte_to_binary(bytekey)
+
+# # test
 
 # c = cipherBlock(k, p)
-# print(c)
+# c = int(c, 2)
+# cipher_bytes = c.to_bytes(8, 'big')
+# print(cipher_bytes)
