@@ -80,13 +80,13 @@ def byte_to_binary(byte_seqs):
     return ''.join(format(byte, '08b') for byte in byte_seqs)
 
 
-# byteplain = b"\x00\x11\x22\x33\x44\x55\x66\x77"
-# bytekey = b"\x81\x23\x45\x67\x89\xab\xcd\xef\xfe\xdc\xba\x98\x76\x54\x32\x18"
-# p, k = byte_to_binary(byteplain), byte_to_binary(bytekey)
+byteplain = b"\x00\x11\x22\x33\x44\x55\x66\x77"
+bytekey = b"\x81\x23\x45\x67\x89\xab\xcd\xef\xfe\xdc\xba\x98\x76\x54\x32\x18"
+p, k = byte_to_binary(byteplain), byte_to_binary(bytekey)
 
-# # test
+# test
 
-# c = cipherBlock(k, p)
-# c = int(c, 2)
-# cipher_bytes = c.to_bytes(8, 'big')
-# print(cipher_bytes)
+c = cipherBlock(k, p)
+c = int(c, 2)
+cipher_bytes = c.to_bytes(8, 'big')
+print(cipher_bytes)

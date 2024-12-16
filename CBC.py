@@ -66,5 +66,7 @@ key = '1101001110110010101010101110101110011001101010011111000101110100110010101
 c = CBC_CTR(plainText, key)
 c1 = c.CBC()
 c2 = c.CTR()
+print('CBC output:')
 print(c1)
+print('CTR output:')
 print(c2)
